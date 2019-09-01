@@ -3,20 +3,17 @@
 
 import requests, re, time, sys
 
-url = "https://www.atg.world/user-profile/Mjc5OTM="
+url = "https://www.atg.world/view-article/A%20HIDDEN%20STORY-30953"
 
 def extract_data(s):
-    lst=[]
-    pattern1 = re.compile('''<a\s+class="actlink"\s+href="https:\/\/www\.atg\.world\/view-article\/[a-zA-Z0-9\s]+-\d+">\s+"[a-zA-Z0-9\s]+"<\/a>''')
+    pattern1 = re.compile('''<script type="application\/ld\+json">\[{[@:.,\-"\/a-zA-Z0-9\s]+}]<\/script>''')
     
-    pattern2 = re.compile('''"[a-zA-Z0-9\s]+"\s*<''')
+    pattern2 = re.compile('''"headline"\s*:\s*"[a-zA-z0-9\s]+"''')
     
-    matches = re.findall(pattern1,s)
+    match = re.findall(pattern1,s)[0]
+    match = re.findall(pattern2,match)[0].split(":")
     
-    for match in matches:
-        lst.append(re.search(pattern2,match).group()[:-1])
-    lst = set(lst)
-    return lst
+    return match[1]
 
 start = time.time()
 resp = requests.get(url)
@@ -30,6 +27,4 @@ Wpage = str(resp.text)
 print("\nResponse Time : ",ResTime,"ms")
 print("Status Code : ", status)
 
-print("\n\nThe titles of articles in "+url+" is :\n")
-for i in extract_data(Wpage):
-    print(i)
+print("\n\nThe title of article at "+url+" is : ",extract_data(Wpage))
