@@ -1,5 +1,5 @@
 #Env is windows
-#Sandeepkrishna S
+#Author : Sandeepkrishna S
 
 import requests, re, time, sys
 
