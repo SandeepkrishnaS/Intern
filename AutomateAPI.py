@@ -14,7 +14,7 @@ url = 'https://www.atg.party/ws-dashboard?user_id=455'
 
 
 def scrape_emails_N_phones(u):
-    Wpage = requests.get(u, proxies=proxyDict).text
+    Wpage = requests.get(u, proxies=proxyDict).text  # Remove the proxies switch if not required....
     
     patter1 = re.compile('''[a-zA-Z0-9-()*_.]+@[a-zA-Z0-9-_]+.\b(in|com|word|us|party|world)\b''')
     
