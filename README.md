@@ -1,2 +1,2 @@
 # Internshala
-Usage : python3 AutoAPI.py
+Usage : python3 AutomateAPI.py
